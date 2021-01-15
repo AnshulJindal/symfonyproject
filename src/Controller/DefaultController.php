@@ -1,10 +1,11 @@
 <?php
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController
+class DefaultController extends AbstractController
 {
     /**
      * @Route("/")
@@ -20,6 +21,14 @@ class DefaultController
 
     public function show($slug)
     {
-        return new Response(sprintf('to show questions %s',$slug));
+        $answers=[
+            'Anshul Jindal',
+            'Karan Chadha',
+            'Konark Kapil'
+        ];
+        return $this->render('defaults/show.html.twig',[
+            'question' => $slug,
+            'answers' => $answers
+        ]);
     }
 }
