@@ -8,15 +8,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/",name="app_homepage")
      */
     public function index()
     {
-        return new Response('Anshul Jindal');
+        return $this->render('defaults/homepage.html.twig');
     }
 
     /**
-     * @Route("/questions/{slug}")
+     * @Route("/questions/{slug}",name="app_question_show")
      */
 
     public function show($slug)
@@ -27,7 +27,7 @@ class DefaultController extends AbstractController
             'Konark Kapil'
         ];
         return $this->render('defaults/show.html.twig',[
-            'question' => $slug,
+            'question' => ucwords(str_replace('-',' ',$slug)),
             'answers' => $answers
         ]);
     }
