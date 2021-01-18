@@ -26,9 +26,12 @@ class DefaultController extends AbstractController
             'Karan Chadha',
             'Konark Kapil'
         ];
+        $questionText="I 've been turned into a cat, any thoughts on how to turn back? While 
+                        I 'm adorable, I don't really care for cat food.";
         return $this->render('defaults/show.html.twig',[
             'question' => ucwords(str_replace('-',' ',$slug)),
-            'answers' => $answers
+            'answers' => $answers,
+            'questionText' => $questionText
         ]);
     }
 }
