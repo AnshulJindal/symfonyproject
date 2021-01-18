@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\DevelopersRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\DBAL\Schema\Constraint as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=DevelopersRepository::class)
+ * @UniqueEntity(fields=["email","name"],message="This one is already taken")
  */
 class Developers
 {
@@ -24,6 +27,7 @@ class Developers
 
     /**
      * @ORM\Column(type="string", length=30, unique=true)
+     * @Assert\Email()
      */
     private $email;
 
@@ -78,7 +82,6 @@ class Developers
     public function setPassword(?string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 }
