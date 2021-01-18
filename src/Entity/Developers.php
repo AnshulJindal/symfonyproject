@@ -2,14 +2,17 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\DevelopersRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Doctrine\DBAL\Schema\Constraint as Assert;
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+
 
 /**
  * @ORM\Entity(repositoryClass=DevelopersRepository::class)
- * @UniqueEntity(fields=["email","name"],message="This one is already taken")
+ * @UniqueEntity("email")
  */
 class Developers
 {
@@ -27,7 +30,7 @@ class Developers
 
     /**
      * @ORM\Column(type="string", length=30, unique=true)
-     * @Assert\Email()
+     * @Assert\Email
      */
     private $email;
 

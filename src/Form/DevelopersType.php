@@ -3,24 +3,41 @@ namespace App\Form;
 
 use App\Entity\Developers;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class DevelopersType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',TextType::class)
-            ->add('email'.EmailType::class)
-            ->add('password',RepeatedType::class)
+            ->add('name',TextType::class,[
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('email',EmailType::class,[
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('password',RepeatedType::class,[
+                'type' => PasswordType::class,
+                'required' => true,
+                'first_options'  => ['label' => 'Password'],
+                'second_options' => ['label' => 'Confirm Password'],
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
             ->add('submit',SubmitType::class,[
                 'attr' => [
-                    'class' => 'btn btn-success pull-right'
+                    'class' => 'btn btn-success align-self-center'
                 ]
             ]);
     }
