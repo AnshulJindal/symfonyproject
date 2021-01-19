@@ -8,9 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/",name="app_homepage")
+     * @Route("/homepage",name="app_homepage")
      */
-    public function index()
+    public function homepage()
     {
         return $this->render('defaults/homepage.html.twig');
     }
