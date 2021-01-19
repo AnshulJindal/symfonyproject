@@ -38,6 +38,11 @@ class Developers implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $imagelink;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,5 +115,17 @@ class Developers implements UserInterface
     public function getUsername()
     {
         return null;
+    }
+
+    public function getImagelink(): ?string
+    {
+        return $this->imagelink;
+    }
+
+    public function setImagelink(string $imagelink): self
+    {
+        $this->imagelink = $imagelink;
+
+        return $this;
     }
 }
