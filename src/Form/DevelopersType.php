@@ -18,26 +18,35 @@ class DevelopersType extends AbstractType
         $builder
             ->add('name',TextType::class,[
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Enter Name...'
                 ]
             ])
             ->add('email',EmailType::class,[
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Enter Email...'
                 ]
             ])
             ->add('password',RepeatedType::class,[
                 'type' => PasswordType::class,
                 'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Confirm Password'],
-                'attr' => [
-                    'class' => 'form-control'
+                'first_options'  => ['label' => 'Password',
+                    'attr' => [
+                        'class' => 'form-control',
+                        'placeholder' => 'Enter Password...'
+                    ]
+                ],
+                'second_options' => ['label' => 'Confirm Password',
+                    'attr' => [
+                        'class' => 'form-control',
+                        'placeholder' => 'Confirm Password...'
+                    ]
                 ]
             ])
             ->add('submit',SubmitType::class,[
                 'attr' => [
-                    'class' => 'btn btn-success align-self-center'
+                    'class' => 'btn btn-success mt-3 mx-auto d-block'
                 ]
             ]);
     }
