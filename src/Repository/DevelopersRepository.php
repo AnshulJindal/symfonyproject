@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Developers;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
  * @method Developers|null find($id, $lockMode = null, $lockVersion = null)

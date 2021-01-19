@@ -5,16 +5,15 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\DevelopersRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-
-
 
 
 /**
  * @ORM\Entity(repositoryClass=DevelopersRepository::class)
  * @UniqueEntity("email")
  */
-class Developers
+class Developers implements UserInterface
 {
     /**
      * @ORM\Id
@@ -64,7 +63,7 @@ class Developers
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
+        echo $email;
         return $this;
     }
     public function toArray()
@@ -85,6 +84,31 @@ class Developers
     public function setPassword(?string $password): self
     {
         $this->password = $password;
+        echo $password;
         return $this;
+    }
+     /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+    public function getRoles()
+    {
+        return null;
+    }
+    public function getUsername()
+    {
+        return null;
     }
 }
