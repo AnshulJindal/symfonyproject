@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\DevelopersRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -43,6 +45,21 @@ class Developers implements UserInterface
      */
     private $imagelink;
 
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity=Questions::class, mappedBy="developers", orphanRemoval=true)
+     */
+    private $questions;
+
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,17 +85,7 @@ class Developers implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
-        echo $email;
         return $this;
-    }
-    public function toArray()
-    {
-        return [
-            'id' => $this->getId(),
-            'name' => $this->getName(),
-            'email' => $this->getEmail(),
-            'password' => $this->getPassword()
-        ];
     }
 
     public function getPassword(): ?string
@@ -89,7 +96,6 @@ class Developers implements UserInterface
     public function setPassword(?string $password): self
     {
         $this->password = $password;
-        echo $password;
         return $this;
     }
      /**
@@ -110,11 +116,15 @@ class Developers implements UserInterface
     }
     public function getRoles()
     {
-        return null;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
     public function getUsername()
     {
-        return null;
+        return $this->name;
     }
 
     public function getImagelink(): ?string
@@ -125,6 +135,43 @@ class Developers implements UserInterface
     public function setImagelink(string $imagelink): self
     {
         $this->imagelink = $imagelink;
+
+        return $this;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Questions[]
+     */
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function addQuestion(Questions $question): self
+    {
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+            $question->setDevelopers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestion(Questions $question): self
+    {
+        if ($this->questions->removeElement($question)) {
+            // set the owning side to null (unless already changed)
+            if ($question->getDevelopers() === $this) {
+                $question->setDevelopers(null);
+            }
+        }
 
         return $this;
     }

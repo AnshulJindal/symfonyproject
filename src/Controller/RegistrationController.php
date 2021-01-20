@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/",name="app_registration")
+     * @Route("/register",name="app_registration")
      */
     public function registeraction(Request $request, UserPasswordEncoderInterface $encoder,FileUploader $fileuploader)
     {
@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($Developer);
             $em->flush();
-            return $this->redirectToRoute('app_homepage');
+            return $this->redirectToRoute('app_login');
         }
         return  $this->render('defaults/registrationform.html.twig',[
             'form' => $form->createView()
