@@ -55,9 +55,15 @@ class Developers implements UserInterface
      */
     private $questions;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Answers::class, mappedBy="developer", orphanRemoval=true)
+     */
+    private $answers;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->answers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -170,6 +176,36 @@ class Developers implements UserInterface
             // set the owning side to null (unless already changed)
             if ($question->getDevelopers() === $this) {
                 $question->setDevelopers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Answers[]
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Answers $answer): self
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers[] = $answer;
+            $answer->setDeveloper($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answers $answer): self
+    {
+        if ($this->answers->removeElement($answer)) {
+            // set the owning side to null (unless already changed)
+            if ($answer->getDeveloper() === $this) {
+                $answer->setDeveloper(null);
             }
         }
 

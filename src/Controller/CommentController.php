@@ -20,4 +20,24 @@ class CommentController extends AbstractController
          }
          return $this->json(['votes' => $currentVoteCount]);
      }
+
+     /**
+     * @Route("/questions/{slug}",name="app_question_show")
+     */
+
+    public function show($slug)
+    {
+        $answers=[
+            'Anshul Jindal',
+            'Karan Chadha',
+            'Konark Kapil'
+        ];
+        $questionText="I 've been turned into a cat, any thoughts on how to turn back? While 
+                        I 'm adorable, I don't really care for cat food.";
+        return $this->render('defaults/show.html.twig',[
+            'question' => ucwords(str_replace('-',' ',$slug)),
+            'answers' => $answers,
+            'questionText' => $questionText
+        ]);
+    }
  }

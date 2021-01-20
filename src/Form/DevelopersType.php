@@ -19,19 +19,17 @@ class DevelopersType extends AbstractType
         $builder
             ->add('imagelink',FileType::class,[
                 'label' => 'Image',
-                'attr' => [
-                    'class' => 'custom-file'
+                'attr' =>[
+                    'placeholder' => 'Choose Image'
                 ]
             ])
             ->add('name',TextType::class,[
                 'attr' => [
-                    'class' => 'form-control',
                     'placeholder' => 'Enter Name...'
                 ]
             ])
             ->add('email',EmailType::class,[
                 'attr' => [
-                    'class' => 'form-control',
                     'placeholder' => 'Enter Email...'
                 ]
             ])
@@ -40,13 +38,11 @@ class DevelopersType extends AbstractType
                 'required' => true,
                 'first_options'  => ['label' => 'Password',
                     'attr' => [
-                        'class' => 'form-control',
                         'placeholder' => 'Enter Password...'
                     ]
                 ],
                 'second_options' => ['label' => 'Confirm Password',
                     'attr' => [
-                        'class' => 'form-control',
                         'placeholder' => 'Confirm Password...'
                     ]
                 ]
