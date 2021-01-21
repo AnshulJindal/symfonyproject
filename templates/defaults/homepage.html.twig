@@ -22,7 +22,16 @@
                                 <div class="col-2 text-center">
                                     <img src="{{ asset('images/' ~ question.developers.imagelink ) }}" width="100" height="100"  alt="Profile Pic">
                                     <div class="vote-arrows vote-arrows-alt flex-fill pt-2" style="min-width: 90px;">
-                                        <span>+  votes</span>
+                                        {% set likes = 0 %}
+                                        {% set dislikes = 0 %}
+                                            {% set loopOutput %}
+                                                {% for answer in question.answers.snapshot %}
+                                                    {% set likes = likes + answer.likes %}
+                                                    {% set dislikes = dislikes + answer.dislikes %}
+                                                {% endfor %}
+                                            {% endset %}
+                                            <span> {{ likes - dislikes }} votes</span>
+                                        {{ loopOutput }}
                                     </div>
                                 </div>
                                 <div class="col">
@@ -34,9 +43,10 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="answer-link" href="{{ path('app_question_show',{ slug: 'pausing-a-spell' }) }}" style="color: #fff;">
+                        <a class="answer-link" href="{{ path('app_question_show',{ slug: question.id }) }}" style="color: #fff;">
                             <p class="q-display-response text-center p-3">
-                                <i class="fa fa-magic magic-wand"></i> 15 answers
+                                <i class="fa fa-magic magic-wand"></i> 
+                                {{ question.answers.snapshot|length }} Answers
                             </p>
                         </a>
                     </div>

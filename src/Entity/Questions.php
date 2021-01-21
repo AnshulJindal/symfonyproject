@@ -99,7 +99,6 @@ class Questions
     public function setDevelopers(?Developers $developers): self
     {
         $this->developers = $developers;
-        dd($this->developers);
         return $this;
     }
 

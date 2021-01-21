@@ -20,7 +20,7 @@
     <div class=" justify-content-end">
         {% if app.user %}
             <a class="btn btn-disabled">Hi, {{ app.user.name }} </a>
-            <a href="#"><button class="btn btn-dark">Logout</button></a>
+            <a href="{{ path('app_logout') }}"><button class="btn btn-dark">Logout</button></a>
         {% endif %}
         {% if app.user == null %}
             <a href="{{ path('app_registration') }}"><button class="btn btn-dark">Sign up</button></a>
@@ -30,11 +30,11 @@
 </nav>
 
 {% block body %}{% endblock %}
-<footer class="mt-5 p-3 text-center bg-secondary">
+<footer class="mt-5 p-3 mb-0 text-center bg-secondary">
     Made with <i style="color: red;" class="fa fa-heart"></i> by the guys and gals at <a style="color: #444; text-decoration: underline;" href="https://symfonycasts.com">SymfonyCasts</a>
 </footer>
 {% block javascripts %}
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 {% endblock %}
 </body>
 </html>

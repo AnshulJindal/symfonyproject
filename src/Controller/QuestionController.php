@@ -9,7 +9,7 @@ use App\Entity\Questions;
 use App\Form\QuestionsType;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends AbstractController
+class QuestionController extends AbstractController
 {
     /**
      * @Route("/",name="app_homepage")

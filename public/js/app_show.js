@@ -1,12 +1,9 @@
-var $container = $('.js-vote-arrows');
-$container.find('button').on('click', function(e) {
-    e.preventDefault();
-    var $link = $(e.currentTarget);
+function likeanddislike(id,dir)
+{
     $.ajax({
-        url: '/comments/10/vote/'+$link[0].attributes[2].nodeValue,
-        method: 'POST'
+        url: '/answer/'+id+'/vote/'+dir
     }).then(function(data) {
-        
-        $container.find('.js-vote-total').text(data.votes);
+        console.log(data);
+        $('.'+id).text(data.votes+" Votes");
     });
-});
+}
